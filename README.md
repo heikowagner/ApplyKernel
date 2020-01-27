@@ -8,7 +8,7 @@ pip install git+https://github.com/heikowagner/ApplyKernel.git
 
 # Usage
 To train a model:
-`TrainedModel= ApplyKernel(<Model>, <Kernel>, <Bandwith>).train(<LabeledPointVector>)`.
+`TrainedModel= ApplyKernel(<Model>, <Kernel>, <Bandwidth>).train(<LabeledPointVector>)`.
 
 For prediction:
 `TrainedModel.predict(<FeatureVector>)`.
