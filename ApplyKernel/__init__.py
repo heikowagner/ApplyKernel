@@ -12,7 +12,8 @@ def construct_K(Y_X,lamb,kernel, X_1=None):
     else:
         sp_X_1=sp_X
     sp_Y=Y_X.map(lambda x: x.label).zipWithIndex().map(lambda(x,y) : (y,x) )
-    grid=sp_X.cartesian(sp_X_1)
+    grid=sp_X_1.cartesian(sp_X)
+    #grid=sp_X.cartesian(sp_X_1)
     K=grid.map(lambda(x,y) : (x[1],kernel(x[0],y[0],lamb)) )
     return [sp_Y, K]
 
