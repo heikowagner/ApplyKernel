@@ -15,14 +15,15 @@ import matplotlib.pyplot as plt
 
 ##Generate data
 #Simulation
-N=150
-
-Y=np.random.randint(0,2,N)
-X=np.array([np.random.normal(0,1,N)+Y*np.random.normal(3,1,N), np.random.normal(0,1,N)+Y*np.random.normal(3,1,N) ])
+N=500
+Y= np.random.randint(0,2,N)
+degree=np.random.normal(0,1,N)*2*np.pi
+X= [0+ (0.5 + Y*0.5)* np.cos(degree)+ np.random.normal(0,2,N)*0.05, 0 + (0.5 + Y*0.5)*np.sin(degree)+ np.random.normal(0,2,N)*0.05   ]
 
 #plot data
 plt.scatter(X[0], X[1], c=Y)
 plt.show()
+
 X_par=sc.parallelize(np.transpose(X)).zipWithIndex().map(lambda(x,y) : (y,x) )
 Y_par=sc.parallelize(np.transpose(Y)).zipWithIndex().map(lambda(x,y) : (y,x) )
 Y_X= Y_par.join(X_par).map(lambda(y,x) : LabeledPoint(x[0], x[1])  )
