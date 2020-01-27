@@ -11,7 +11,7 @@ To train a model:
 `TrainedModel= ApplyKernel(<Model>, <Kernel>, <Bandwith>).train(<LabeledPointVector>)`.
 
 For prediction:
-`TrainedModel.predict(<FeatureVector>)`
+`TrainedModel.predict(<FeatureVector>)`.
 
 ##Example:
 ```python
