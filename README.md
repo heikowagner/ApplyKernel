@@ -36,7 +36,7 @@ from pyspark.mllib.classification import SVMModel, SVMWithSGD
 
 ##Train the Models
 #KernelRegression= ApplyKernel(LinearRegressionWithSGD, RadialKernel, 0.5).train(Y_X)
-#KernelRegression= ApplyKernel(LogisticRegressionWithLBFGS, RadialKernel, 0.5).train(Y_X)
+#KernelLogit= ApplyKernel(LogisticRegressionWithLBFGS, RadialKernel, 0.5).train(Y_X)
 
 KernelSVM= ApplyKernel(SVMWithSGD, RadialKernel, 0.5).train(Y_X)
 
