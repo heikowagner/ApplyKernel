@@ -1,4 +1,5 @@
 from pyspark.mllib.regression import LabeledPoint
+import numpy as np
 
 def RadialKernel(x,y,sigma):
     return np.exp(-sum((x-y)**2)/(2*sigma**2))
