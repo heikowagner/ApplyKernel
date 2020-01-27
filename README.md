@@ -24,12 +24,12 @@ X= [0+ (0.5 + Y*0.5)* np.cos(degree)+ np.random.normal(0,2,N)*0.05, 0 + (0.5 + Y
 plt.scatter(X[0], X[1], c=Y)
 plt.show()
 
+#Create LabeledPoint Vector
+from pyspark.mllib.regression import LabeledPoint
 X_par=sc.parallelize(np.transpose(X)).zipWithIndex().map(lambda(x,y) : (y,x) )
 Y_par=sc.parallelize(np.transpose(Y)).zipWithIndex().map(lambda(x,y) : (y,x) )
 Y_X= Y_par.join(X_par).map(lambda(y,x) : LabeledPoint(x[0], x[1])  )
-#print(Y_X.collect())
 
-from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.regression import LinearRegressionModel, LinearRegressionWithSGD
 from pyspark.mllib.classification import LogisticRegressionWithLBFGS, LogisticRegressionModel
 from pyspark.mllib.classification import SVMModel, SVMWithSGD
