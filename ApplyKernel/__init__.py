@@ -46,4 +46,5 @@ class ApplyKernel:
     def predict(self, data, **kwargs):
         data_K= construct_K(self.Y_X_dat, self.lambd, self.kernel, data)
         l_dat=construct_labeled(data_K[0], data_K[1])
-        return self.trained.predict( l_dat[0].map(lambda p:  p.features.toArray()), **kwargs )
+        pred= self.trained.predict( l_dat[0].map(lambda p:  p.features.toArray()), **kwargs )
+        return l_dat[1].zip(pred).sortByKey().map(lambda (x,y): y)
