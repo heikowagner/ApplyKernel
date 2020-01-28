@@ -13,7 +13,6 @@ def construct_K(Y_X,lamb,kernel, X_1=None):
         sp_X_1=sp_X
     sp_Y=Y_X.map(lambda x: x.label).zipWithIndex().map(lambda(x,y) : (y,x) )
     grid=sp_X_1.cartesian(sp_X)
-    #grid=sp_X.cartesian(sp_X_1)
     K=grid.map(lambda(x,y) : (x[1],kernel(x[0],y[0],lamb)) )
     return [sp_Y, K]
 
@@ -23,7 +22,7 @@ def construct_labeled(Y,K):
             return (min(acc[0],x[0]), acc[1] + [x[1]]  )
         else:
             return (min(acc[0],x[0]), [acc[1]] + [x[1]]  )
-    jnd=Y.join(K).reduceByKey(lambda acc, x : add_element(acc,x) )
+    jnd=Y.join(K).reduceByKey(lambda acc, x : add_element(acc,x) ).cache()
     labeled=jnd.map(lambda(y,x) : LabeledPoint(x[0], x[1])  )
     order=jnd.map(lambda (y,x): y)
     return [labeled, order]
