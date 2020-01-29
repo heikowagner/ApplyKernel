@@ -25,6 +25,7 @@ def construct_labeled(Y,K):
     jnd=Y.join(K).reduceByKey(lambda acc, x : add_element(acc,x) ).cache()
     labeled=jnd.map(lambda(y,x) : LabeledPoint(x[0], x[1])  )
     order=jnd.map(lambda (y,x): y)
+    jnd.unpersist()
     return [labeled, order]
             
 class ApplyKernel:
