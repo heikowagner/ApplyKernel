@@ -22,7 +22,7 @@ def construct_labeled(Y,K):
             return (min(acc[0],x[0]), acc[1] + [x[1]]  )
         else:
             return (min(acc[0],x[0]), [acc[1]] + [x[1]]  )
-    jnd=Y.join(K).reduceByKey(lambda acc, x : add_element(acc,x) )
+    jnd=Y.join(K).reduceByKey(lambda acc, x : add_element(acc,x) ).cache()
     labeled=jnd.map(lambda(y,x) : LabeledPoint(x[0], x[1])  )
     order=jnd.map(lambda (y,x): y)
     return [labeled, order]
