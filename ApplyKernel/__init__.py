@@ -37,7 +37,7 @@ class ApplyKernel:
 
     def train(self, data, **kwargs):
         data_K= construct_K(data, self.lambd, self.kernel)
-        self.Y_X_dat=data
+        self.Y_X_dat=data.cache()
         new_data=construct_labeled(data_K[0],data_K[1])
         self.trained=self.method.train( new_data[0] ,**kwargs)
         return self 
