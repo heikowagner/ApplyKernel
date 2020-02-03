@@ -5,7 +5,7 @@ Install the package via:
 ```
 pip install git+https://github.com/heikowagner/ApplyKernel.git
 ```
-#Theoretical Insights
+# Theoretical Insights
 The theoretical foundation for the kernel method can be found at https://www.thebigdatablog.com/non-linear-support-vector-machines-svm-in-spark/ implementation details at https://www.thebigdatablog.com/non-linear-classification-methods-in-spark/.
 
 # Usage
